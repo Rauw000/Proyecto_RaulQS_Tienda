@@ -72,6 +72,8 @@ public class ProjectConfig implements WebMvcConfigurer{
            messageSource.setDefaultEncoding("UTF-8");
            return messageSource;
        }
+       
+       // Practica de coidgo todo va bien no se pega hay que esperar a ver que pasa con el internet de la u a ver si lo corre bien --> este es con el internet de la u va bien el codigo se ve maso menos pero corre bien el codigo <--  
    
 }
  

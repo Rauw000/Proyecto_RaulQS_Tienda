@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<!-- Esta es la página principal del sitio web TechShop -->
+<html>
+    <head th:replace="~{general/fragmentos :: head}">
+        <title>TechShop</title>
+    </head>
+
+    <body>
+        <header th:replace="~{general/fragmentos :: header}"/>
+
+        <section th:replace="~{categoria/fragmentos :: agregar}"/>
+        <section th:replace="~{categoria/fragmentos :: listado}"/>
+
+        <footer th:replace="~{general/fragmentos :: footer}"/>
+    </body>
+</html>
