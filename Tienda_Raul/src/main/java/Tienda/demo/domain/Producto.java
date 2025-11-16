@@ -17,7 +17,7 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id_producto")
     private Integer IdProducto;
-    private Integer IdCategoria;
+    
     
     @Column(nullable = false, length = 50)
     @NotBlank(message = "La descripción no puede estar vacia.")

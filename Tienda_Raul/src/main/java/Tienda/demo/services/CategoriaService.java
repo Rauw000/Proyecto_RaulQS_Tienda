@@ -2,6 +2,7 @@ package Tienda.demo.services;
 
 import Tienda.demo.domain.Categoria;
 import Tienda.demo.repository.CategoriaRepository;
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,14 +19,16 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
 
     @Autowired
-    private FirebaseStorageService firebaseStorageService; 
+    private FirebaseStorageService firebaseStorageService;
 
     @Transactional(readOnly = true)
     public List<Categoria> getCategorias(boolean activo) {
         if (activo) {
             return categoriaRepository.findByActivoTrue();
+        } else {
+            return categoriaRepository.findAll();
         }
-        return categoriaRepository.findAll();
+
     }
 
     @Transactional(readOnly = true)
@@ -37,21 +40,33 @@ public class CategoriaService {
     public void save(Categoria categoria, MultipartFile imagenFile) {
         categoria = categoriaRepository.save(categoria);
         if (!imagenFile.isEmpty()) {
+            File tempFile = null;
             try {
-                String rutaImagen = firebaseStorageService.uploadImage(
-                        imagenFile, "categoria",
-                        categoria.getIdCategoria());
+                // Crear archivo temporal
+                tempFile = File.createTempFile("temp", imagenFile.getOriginalFilename());
+                imagenFile.transferTo(tempFile);
+
+                // Subir archivo a Firebase
+                String rutaImagen = firebaseStorageService.uploadFile(
+                        tempFile, "categoria",
+                        String.valueOf(categoria.getIdCategoria()));
+
+                // Guardar la URL en la entidad
                 categoria.setRutaImagen(rutaImagen);
                 categoriaRepository.save(categoria);
             } catch (IOException e) {
-              
                 e.printStackTrace();
+            } finally {
+                // Eliminar archivo temporal
+                if (tempFile != null && tempFile.exists()) {
+                    tempFile.delete();
+                }
             }
         }
     }
 
     @Transactional
-    public void delete(Integer idCategoria) { 
+    public void delete(Integer idCategoria) {
         if (!categoriaRepository.existsById(idCategoria)) {
             throw new IllegalArgumentException("La categoria con ID " + idCategoria + " no existe.");
         }

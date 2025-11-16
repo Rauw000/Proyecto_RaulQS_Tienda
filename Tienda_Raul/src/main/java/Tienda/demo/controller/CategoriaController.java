@@ -13,7 +13,12 @@ public class CategoriaController {
 
     @Autowired
     private CategoriaService categoriaService;
-    
+
+    @GetMapping
+    public String redirigirAlListado() {
+        return "redirect:/categoria/listado";
+    }
+
     @GetMapping("/listado")
     public String listado(Model model) {
         var categorias = categoriaService.getCategorias(false);
@@ -22,4 +27,3 @@ public class CategoriaController {
         return "/categoria/listado";
     }
 }
- 

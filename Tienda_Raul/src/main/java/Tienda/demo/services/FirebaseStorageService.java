@@ -1,4 +1,4 @@
-package com.tienda.service;
+package Tienda.demo.services;
 
 import com.google.auth.Credentials;
 import com.google.auth.ServiceAccountSigner;
@@ -53,10 +53,10 @@ public class FirebaseStorageService {
         }
     }
 
-    private String uploadFile(File file, String carpeta, String fileName) throws IOException {
+    public String uploadFile(File file, String carpeta, String imagenFile) throws IOException {
         //Se define el lugar y acceso al archivo .json
         ClassPathResource json = new ClassPathResource(rutaJsonFile + File.separator + archivoJsonFile);
-        BlobId blobId = BlobId.of(BucketName, rutaSuperiorStorage + "/" + carpeta + "/" + fileName);
+        BlobId blobId = BlobId.of(BucketName, rutaSuperiorStorage + "/" + carpeta + "/" + imagenFile);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("media").build();
 
         Credentials credentials = GoogleCredentials.fromStream(json.getInputStream());

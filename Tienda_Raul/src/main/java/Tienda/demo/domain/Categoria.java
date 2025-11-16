@@ -39,11 +39,10 @@ public class Categoria implements Serializable {
     @Column(name = "fecha_modificacion", insertable = false, updatable = false)
     private LocalDateTime fechaModificacion;
 
-    public Categoria() {
-    }
-
     public Categoria(String descripcion, boolean activo) {
         this.descripcion = descripcion;
         this.activo = activo;
     }
+    @OneToMany(mappedBy = "categoria")
+    private List <Producto> productos;
 }
