@@ -2,6 +2,7 @@ package Tienda.demo.controller;
 
 
 import Tienda.demo.services.CategoriaService;
+import Tienda.demo.services.ProductoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
