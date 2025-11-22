@@ -3,7 +3,6 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-
     <th:block th:fragment="head">
         <title>TechShop</title>
         <meta charset="UTF-8"/>
@@ -16,19 +15,18 @@
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </th:block>
 
-
     <th:block th:fragment="header">
         <header class="header">
 
             <nav class="navbar navbar-expand-sm p-0">
-                <div class="container">                    
+                <div class="container">
                     <a th:href="@{/}" class="navbar-brand">[[#{aplicacion.titulo}]]</a>
                     <button class="navbar-toggler" data-bs-toggle="collapse"
-                            data-bs-target="#navbarCollapse">
+                            data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <ul class="navbar-nav" sec:authorize="hasRole('ROLE-VENDEDOR') or hasRole ('ROLE_ADMIN')">
+                        <ul class="navbar-nav" sec:authorize="hasRole('ROLE-VENDEDOR') or hasRole('ROLE_ADMIN')">
                             <li class="nav-item px-2"><a class="nav-link" th:href="@{/categoria/listado}">[[#{plantilla.categorias}]]</a></li>
                             <li class="nav-item px-2"><a class="nav-link" th:href="@{/producto/listado}">[[#{plantilla.productos}]]</a></li>
                             <li class="nav-item px-2"><a class="nav-link" th:href="@{/consultas/listado}">[[#{plantilla.consultas}]]</a></li>
@@ -39,7 +37,7 @@
 
                                 <ul class="dropdown-menu">
 
-                                    <li><a class="dropdown-item" th:href="@{/usuario/listado}">[[#{plantilla.usuarios}]]</a></li>                                    
+                                    <li><a class="dropdown-item" th:href="@{/usuario/listado}">[[#{plantilla.usuarios}]]</a></li>
 
                                     <!-- Submenú seguridad -->
                                     <li class="submenu submenu-md dropend">
@@ -49,7 +47,7 @@
                                             [[#{plantilla.seguridad}]]
                                         </a>
 
-                                        <ul class="dropdown-menu">                                            
+                                        <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" th:href="@{/role/listado}">[[#{plantilla.troles}]]</a></li>
                                             <li><a class="dropdown-item" th:href="@{/usuario_role/asignar}">[[#{plantilla.permisos}]]</a></li>
                                             <li><a class="dropdown-item" th:href="@{/ruta/listado}">[[#{plantilla.rutas}]]</a></li>
@@ -61,7 +59,6 @@
                                 </ul>
                             </li>
                         </ul>
-
 
                         <!-- Menú idioma -->
                         <ul class="navbar-nav">
@@ -77,14 +74,18 @@
                                 </ul>
                             </li>
                         </ul>
+
+                        <!-- Usuario NO autenticado -->
                         <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
                             <li class="nav-item my-auto">
-                                <a class="nav-link">
-                                    <i class="fas fa-user"></i>
-                                    <span sec:authentication="name" class="ms-l"</span>
+                                <a class="nav-link" th:href="@{/login}">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span class="ms-1">Login</span>
                                 </a>
                             </li>
                         </ul>
+
+                        <!-- Usuario autenticado -->
                         <ul class="navbar-nav" sec:authorize="isAuthenticated()">
                             <li class="nav-item my-auto">
                                 <a class="nav-link">
@@ -102,7 +103,6 @@
                             </li>
                         </ul>
 
-
                         <div id="resultBlock"></div>
 
                     </div>
@@ -119,7 +119,6 @@
                     </div>
                 </div>
             </section>
-
 
             <!-- TOASTS -->
             <section th:fragment="mostrarToast">
@@ -164,19 +163,10 @@
         </header>
     </th:block>
 
-
-
     <th:block th:fragment="footer">
         <footer class="p-2 mt-5 bg-info text-white">
-            <p class="lead text-center">[[#{plantilla.derechos}]] &COPY;</p>
+            <p class="lead text-center">[[#{plantilla.derechos}]] &copy;</p>
         </footer>
     </th:block>
 
 </html>
-
-
-
-
-
-
-

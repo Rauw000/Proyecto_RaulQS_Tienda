@@ -14,10 +14,10 @@ import org.springframework.core.io.ClassPathResource;
 @Configuration
 public class StorageConfig{ 
 
-    @Value("${firebase.json.path}")
+    @Value("${proyectotiendaraul-firebase-adminsdk-fbsvc-05093eedd2.path}")
     private String jsonPath;
 
-    @Value("${firebase.json.file}")
+    @Value("${proyectotiendaraul-firebase-adminsdk-fbsvc-05093eedd2.file}")
     private String jsonFile;
 
     @Bean

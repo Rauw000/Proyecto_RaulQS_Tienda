@@ -23,4 +23,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     public List<Producto> consultaSQL(@Param("precioInf") double precioInf,
             @Param("precioSup") double precioSup);
 
+    @Query("SELECT p FROM Producto p WHERE LOWER(p.descripcion) LIKE LOWER(CONCAT('%', :nombre, '%'))")
+    List<Producto> consultaPorNombre(@Param("nombre") String nombre);
+
 }
