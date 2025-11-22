@@ -73,7 +73,7 @@ public class CategoriaService {
         try {
             categoriaRepository.deleteById(idCategoria);
         } catch (DataIntegrityViolationException e) {
-            throw new IllegalStateException("No se puede eliminar la categoria. Tiene datos asociados.", e); // Agregué la coma faltante
+            throw new IllegalStateException("No se puede eliminar el categoria. Tiene datos asociados.", e); // Agregué la coma faltante
         }
     }
 }
