@@ -29,9 +29,9 @@ public class FirebaseStorageService {
     //El nombre del archivo Json
     final String archivoJsonFile = "<<nombre de archivo jaron>>" + ".json";
 
-    public String cargaImagen(MultipartFile archivoLocalCliente, String carpeta, Integer id) {
+    public String uploadImage(MultipartFile archivoLocalCliente, String carpeta, Integer id) {
         try {
-            // El nombre original del archivo local del cliene
+            // El nombre original del archivo local del cliente
             String nombreOriginal = archivoLocalCliente.getOriginalFilename();
 
             // Se genera el nombre según el código del articulo. 
@@ -69,11 +69,9 @@ public class FirebaseStorageService {
     //Método utilitario que convierte el archivo desde el equipo local del usuario a un archivo temporal en el servidor
     private File convertToFile(MultipartFile archivoLocalCliente) throws IOException {
         File tempFile = File.createTempFile("img", null);
-        try (
-                FileOutputStream fos = new FileOutputStream(tempFile)) {
+        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
             fos.write(archivoLocalCliente.getBytes());
         }
-
         return tempFile;
     }
 
@@ -81,5 +79,4 @@ public class FirebaseStorageService {
     private String sacaNumero(long id) {
         return String.format("%014d", id);
     }
-
 }
